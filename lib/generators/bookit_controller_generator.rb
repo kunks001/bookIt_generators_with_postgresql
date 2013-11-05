@@ -1,5 +1,5 @@
 class BookitControllerGenerator < Rails::Generators::Base
-  source_root File.expand_path('../templates', __FILE__)
+  source_root File.expand_path('../templates/controllers', __FILE__)
   argument :resource_name, type: :string, default: 'resource'
 
   def generate_bookit_controller
