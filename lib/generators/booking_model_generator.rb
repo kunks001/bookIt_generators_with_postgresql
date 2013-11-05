@@ -10,6 +10,10 @@ class BookingModelGenerator < Rails::Generators::Base
     create_file "db/migrate/#{Time.now.strftime('%Y%l%M%S%w%y')}_create_bookings.rb", migration
   end
 
+  def generate_datetime_initializer
+    copy_file "datetime.rb", "config/initializers/datetime.rb"
+  end
+
   private
 
   def migration
