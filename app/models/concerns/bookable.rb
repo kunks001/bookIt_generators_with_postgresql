@@ -12,30 +12,55 @@ module Bookable
     before_validation :calculate_end_time
 
     scope :end_during, ->(new_start_time, new_end_time) do
-      where(end_time: new_start_time...new_end_time)
+    if (!new_start_time.nil?) && (!new_end_time.nil?)
+      where('end_time > ? AND end_time < ?', new_start_time, new_end_time)
+    else
+      return nil
     end
+  end
 
-    scope :start_during, ->(new_start_time, new_end_time) do
-      where(start_time: new_start_time...new_end_time)
+  scope :start_during, ->(new_start_time, new_end_time) do
+    if (!new_start_time.nil?) && (!new_end_time.nil?)
+      where('start_time > ? AND start_time < ?', new_start_time, new_end_time)
+    else
+      return nil
     end
+  end
 
-    scope :happening_during, ->(new_start_time, new_end_time) do
+  scope :happening_during, ->(new_start_time, new_end_time) do
+    if (!new_start_time.nil?) && (!new_end_time.nil?)
       where('start_time > ? AND end_time < ?', new_start_time, new_end_time)
-    end
+    else
+      return nil
+    end 
+  end
 
-    scope :enveloping, ->(new_start_time, new_end_time) do
+  scope :enveloping, ->(new_start_time, new_end_time) do
+    if (!new_start_time.nil?) && (!new_end_time.nil?)
       where('start_time < ? AND end_time > ?', new_start_time, new_end_time)
+    else
+      return nil
     end
+  end
 
-    def overlaps
-      overlapping_bookings = [ 
-        resource.bookings.end_during(start_time, end_time),
-        resource.bookings.start_during(start_time, end_time),
-        resource.bookings.happening_during(start_time, end_time),
-        resource.bookings.enveloping(start_time, end_time)
-      ].flatten
+  scope :identical, ->(new_start_time, new_end_time) do
+    if (!new_start_time.nil?) && (!new_end_time.nil?)
+      where('start_time = ? AND end_time = ?', new_start_time, new_end_time)
+    else
+      return nil
+    end
+  end
 
-      overlapping_bookings.delete self
+  def overlaps
+    overlapping_bookings = [ 
+      resource.bookings.end_during(start_time, end_time),
+      resource.bookings.start_during(start_time, end_time),
+      resource.bookings.happening_during(start_time, end_time),
+      resource.bookings.enveloping(start_time, end_time),
+      resource.bookings.identical(start_time, end_time)
+    ].flatten
+
+    overlapping_bookings.delete self
       if overlapping_bookings.any?
         errors.add(:base, 'Slot has already been booked')
       end
@@ -48,10 +73,13 @@ module Bookable
     end
 
     def calculate_end_time
-      start_time = self.start_time
-      length = self.length.to_i
-      self.end_time = start_time + length.hours
+      start_time = validate_start_time
+      length = validate_length
+      if start_time && length
+        self.end_time = start_time + (length.hours - 60)
+      end
     end
+
 
     def as_json(options = {})  
      {  
@@ -63,5 +91,23 @@ module Bookable
      }  
     end  
   end
+
+  private
+
+    def validate_start_time
+      if !self.start_time.nil?
+        start_time = self.start_time
+      else
+        return nil
+      end
+    end
+
+    def validate_length
+      if !self.length.nil?
+        length = self.length.to_i
+      else
+        return nil
+      end
+    end
 
 end
