@@ -1,5 +1,5 @@
 class ResourceModelGenerator < Rails::Generators::Base
-  source_root File.expand_path('../templates/modesl', __FILE__)
+  source_root File.expand_path('../templates/models', __FILE__)
   argument :resource_name, :type => :string, :default => "resource"
 
   def generate_resource_model
