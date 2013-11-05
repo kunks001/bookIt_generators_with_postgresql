@@ -1,4 +1,4 @@
-BookIt is a Rails 4.0 gem that enables you to add resource booking functionality to your Rails application. A resource can be anything that is bookable e.g. tennis court, football pitch, bowling lane, function room, conference room, office space. 
+Bookable is a Rails 4.0 gem that enables you to add resource booking functionality to your Rails application. A resource can be anything that is bookable e.g. tennis court, football pitch, bowling lane, function room, conference room, office space. 
 <p>
 Bookings can be created, read, update
 </p>
