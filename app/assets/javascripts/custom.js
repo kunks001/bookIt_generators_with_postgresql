@@ -3,7 +3,7 @@ $(document).ready(function() {
     // page is now ready, initialize the calendar...
 
     var current_resource = function(){
-    	return window.location.href.match(/resources\/(\d+)\/booking/)[1];
+    	return window.location.href.match(/resource\/(\d+)\/booking/)[1];
     };
 
     var today_or_later = function(){
@@ -24,7 +24,7 @@ $(document).ready(function() {
 			},
 
 			eventSources: [{  
-    		url: '/resources/'+current_resource()+'/bookings/',  
+    		url: '/resource/'+current_resource()+'/bookings/',  
    		}],
 
    		selectable: {
@@ -41,7 +41,7 @@ $(document).ready(function() {
 
         function updateEvent(booking) {
               $.ajax(
-                '/resources/'+current_resource()+'/bookings/'+booking.id,
+                '/resource/'+current_resource()+'/bookings/'+booking.id,
                 { 'type': 'PATCH',
 
                   data: { booking: { 
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
         function updateEvent(booking) {
               $.ajax(
-                '/resources/'+current_resource()+'/bookings/'+booking.id,
+                '/resource/'+current_resource()+'/bookings/'+booking.id,
                 { 'type': 'PATCH',
 
                   data: { booking: { 
@@ -100,7 +100,7 @@ $(document).ready(function() {
           );
 
           jQuery.post(
-            '/resources/'+current_resource()+'/bookings',
+            '/resource/'+current_resource()+'/bookings',
             
             { booking: {
               start_time: start,

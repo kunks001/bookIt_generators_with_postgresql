@@ -1,10 +1,9 @@
-class ViewsGenerator < Rails::Generators::Base
+class BookableViewsGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates/views', __FILE__)
-  # source_root File.expand_path('../templates/assets', __FILE__)
 
-  argument :views_name, :type => :string, :default => "resources"
+  argument :bookable_views_name, :type => :string, :default => "resources"
   
-  def generate_views
+  def generate_bookable_views
     template "_errors.html.erb", "app/views/#{folder_name}/_errors.html.erb"
     template "_form.html.erb", "app/views/#{folder_name}/_form.html.erb"
     template "edit.html.erb", "app/views/#{folder_name}/edit.html.erb"
@@ -18,17 +17,17 @@ class ViewsGenerator < Rails::Generators::Base
     template "bookings/new.html.erb", "app/views/bookings/new.html.erb"
     template "bookings/show.html.erb", "app/views/bookings/show.html.erb"
 
-    template "bookings/custom.js", "app/assets/javascripts/custom.js"
-    template "bookings/fullcalendar.js", "app/assets/javascripts/fullcalendar.js"
-    template "bookings/calendar-editable.js", "app/assets/javascripts/calendar-editable.js"
+    # template "bookings/custom.js", "app/assets/javascripts/custom.js"
+    # template "bookings/fullcalendar.js", "app/assets/javascripts/fullcalendar.js"
+    # template "bookings/calendar-editable.js", "app/assets/javascripts/calendar-editable.js"
 
-    template "bookings/custom.css", "app/assets/stylesheets/custom.css"
-    template "bookings/fullcalendar.css", "app/assets/stylesheets/fullcalendar.css"
+    # template "bookings/custom.css", "app/assets/stylesheets/custom.css"
+    # template "bookings/fullcalendar.css", "app/assets/stylesheets/fullcalendar.css"
   end
   
   private
 
     def folder_name
-      views_name.underscore
+      bookable_views_name.underscore
     end
 end

@@ -1,4 +1,7 @@
-This application is written in Ruby 2.0 using the Rails 4.
+BookIt is a Rails 4.0 gem that enables you to add resource booking functionality to your Rails application. A resource can be anything that is bookable e.g. tennis court, football pitch, bowling lane, function room, conference room, office space. 
+<p>
+Bookings can be created, read, update
+</p>
 <h4>Objective</h4>
 To create a booking gem
 <h4>Requirements</h4>
