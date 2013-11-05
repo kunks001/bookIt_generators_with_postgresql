@@ -1,0 +1,17 @@
+USAGE
+
+Include the gem in your gemfile
+  gem 'bookIt'
+  and run bundle install
+  
+or install it with gem install 'bookIt'
+
+rails generate bookIt:install
+
+to specify the name of your resource e.g. tennis court supply it as a parameter e.g.
+  rails generate bookIt:install tennis_court
+
+to skip the view files being installed:
+  rails generate bookIt:install --skip-views
+
+run rake db_migrate
