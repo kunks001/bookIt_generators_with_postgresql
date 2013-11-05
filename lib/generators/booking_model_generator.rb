@@ -7,7 +7,7 @@ class BookingModelGenerator < Rails::Generators::Base
   end
 
   def create_booking_migration
-    create_file "db/migrate/#{Time.now.strftime('%Y%l%M%S%w%y').gsub!(/\s/, '')}_create_bookings.rb", migration
+    create_file "db/migrate/#{Time.now.strftime('%Y%l%M%S%w%y')}_create_bookings.rb", migration
   end
 
   private

@@ -11,7 +11,7 @@
       <%= booking.start_time.strftime('%e %b %Y %H:%M%p') %>
     </td>
     <td>
-      <%= booking.calculate_end_time.strftime('%e %b %Y %H:%M%p') %>
+      <%= (booking.calculate_end_time + 60).strftime('%e %b %Y %H:%M%p') %>
     </td>
     <td><%= link_to "Delete", resource_booking_path(@resource, booking), data: { confirm: 'Are you sure?' }, method: :delete %>
     </td>
